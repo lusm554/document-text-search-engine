@@ -5,3 +5,5 @@ export $(echo $(cat ./config/.env | sed 's/#.*//g'| xargs) | envsubst)
 
 sh config/download_test_csv.sh
 
+docker-compose -f docker-compose.yml up -d
+
