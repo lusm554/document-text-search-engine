@@ -1,7 +1,19 @@
+# Python
+__pycache__/
+
+# Test dataset:
 *.csv
+
+# vim:
 *.swp
+
+# Environments:
 .env
+
+# Docker containers:
 pgdata
 esdata
+
+# Logstash:
 *.conf
 !postgres-jdbc-input.conf
