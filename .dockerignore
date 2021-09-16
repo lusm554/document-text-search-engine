@@ -1,0 +1,11 @@
+.git
+.env
+utils
+*.conf
+!postgres-jdbc-input.conf
+pgdata
+esdata
+*.swp
+*.csv
+*.md
+!README.md
