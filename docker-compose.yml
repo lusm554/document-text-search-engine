@@ -17,7 +17,7 @@ services:
     networks:
       - share-network
 
-  es:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
     container_name: tse_elasticsearch
     environment:
@@ -36,6 +36,27 @@ services:
       - ./esdata:/usr/share/elasticsearch/data
     networks:
       - share-network
-  
+
+  logstash:
+    #image: docker.elastic.co/logstash/logstash:7.14.1
+    image: docker.elastic.co/logstash/logstash:7.14.1@sha256:eb2d60ba01e4aabb28001bf1b17ba69f6c5039746103e004d519f433ab5d584c
+    container_name: tse_logstash
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    ports:
+      - 5044:5044
+    volumes:
+      - ./.docker/logstash/postgresql-jdbc.jar:/usr/share/logstash/logstash-core/lib/jars/postgresql-jdbc.jar
+      - ./.docker/logstash/postgres-jdbc-input.conf:/usr/share/logstash/pipeline/logstash.conf
+    networks:
+      - share-network
+    depends_on:
+      - elasticsearch
+
 networks:
   share-network:
+    driver: bridge
+
+volumes:
+  esdata:
+  pgdata:
