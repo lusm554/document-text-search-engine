@@ -43,6 +43,12 @@ services:
     container_name: tse_logstash
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LOGSTASH_JDBC_URL: jdbc:postgresql://postgres:5432/documents
+      LOGSTASH_JDBC_DRIVER: org.postgresql.Driver
+      LOGSTASH_JDBC_DRIVER_JAR_LOCATION: /usr/share/logstash/logstash-core/lib/jars/postgresql-jdbc.jar
+      LOGSTASH_JDBC_USERNAME: postgres
+      LOGSTASH_JDBC_PASSWORD: lusm123
+      LOGSTASH_ELASTICSEARCH_HOST: http://elasticsearch:9200
     ports:
       - 5044:5044
     volumes:
