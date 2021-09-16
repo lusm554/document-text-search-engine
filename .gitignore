@@ -3,3 +3,5 @@
 .env
 pgdata
 esdata
+*.conf
+!postgres-jdbc-input.conf
