@@ -1,5 +1,23 @@
 version: "3.9"
 services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    environment:
+      FLASK_ENV: development
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/code
+    depends_on:
+      - postgres
+      - elasticsearch
+      - logstash
+    networks:
+      - share-network
+  
   postgres:
     image: postgres:13-alpine
     container_name: tse_postgres
