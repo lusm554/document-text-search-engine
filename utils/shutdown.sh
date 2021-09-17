@@ -1,6 +1,6 @@
 #!/bin/bash
-docker-compose -p text_search_engine down
-docker image rm text_search_engine_web
+docker-compose -p text-search-engine down
+docker image rm text-search-engine_web
 rm -rf pgdata
 rm -rf esdata
 docker volume prune --force

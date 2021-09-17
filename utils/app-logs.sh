@@ -1,2 +1,2 @@
 #!/bin/bash
-docker-compose -p text_search_engine logs -f web
+docker-compose -p text-search-engine logs -f web
