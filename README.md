@@ -27,7 +27,7 @@ A simple search engine for document texts. The data is stored in a database, the
 * `docs.json` - service docs in openapi format.
 
 ### **If u wanna tryhard:**
-- [ ] functional tests;
+- [X] functional testing;
 - [X] service runs in Docker;
 - [X] asynchronous API calls.
 
