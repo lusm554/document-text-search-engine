@@ -7,10 +7,15 @@ services:
     container_name: app
     environment:
       FLASK_ENV: development
+      PG_HOSTNAME: host.docker.internal 
+      PG_USER: postgres
+      PG_PORT: 5432
+      PG_PWD: lusm123
+      PG_DB: documents
     ports:
       - 80:80
     volumes:
-      - ./src:/code
+      - ./src:/src
     depends_on:
       - postgres
       - elasticsearch

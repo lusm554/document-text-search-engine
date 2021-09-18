@@ -1,5 +1,5 @@
 FROM python:3.9-alpine
-WORKDIR /code
+WORKDIR /src
 ENV FLASK_APP=index.py
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=80
