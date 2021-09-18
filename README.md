@@ -4,6 +4,7 @@
 * [About](#about)
 * [How to run](#how-to-run)
 * [License](#license)
+* [What can be improved here?](#improvement)
 
 ## About
 A simple search engine for document texts. The data is stored in a database, the search index is in elastic.
@@ -40,6 +41,11 @@ Then run:
 chmod +x run.sh
 ./run.sh 
 ```
+
+## Improvement
+
+- Use connection pools to reduce request time (at the moment i don't understand how to create globalpool object, i don't fully understand how to work with asynchrony in python)
+
 ## License
 [MIT](https://github.com/lusm554/document-text-search-engine/blob/main/LICENSE)
 
