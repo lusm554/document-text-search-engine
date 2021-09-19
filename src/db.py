@@ -1,5 +1,6 @@
 import asyncio
 import asyncpg
+import requests
 from elasticsearch import AsyncElasticsearch
 from src.config import (
     PG_USER, 
@@ -26,11 +27,21 @@ class Postgres:
 
 class Elastic:
     def __init__(self):
-        self.a = ES_INDEX
         self.conn_settings = [
             {'host': ES_HOSTNAME, 'port': ES_PORT}
         ]
         self.es = None
+        self.__set_dynamic_index_settings__()
+
+    def __set_dynamic_index_settings__(self):
+        body = {
+            'index': { 'search': { 'idle': { 'after': 3600 } } }
+        }
+        r = requests.get(
+            f'http://{ES_HOSTNAME}:{ES_PORT}/{ES_INDEX}/_settings',
+            json=body
+        )
+        assert r.status_code == 200
 
     def connect(self):
         self.es = AsyncElasticsearch(self.conn_settings)
