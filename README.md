@@ -44,7 +44,7 @@ chmod +x run.sh
 
 ## Improvement
 
-- Use connection pools to reduce request time (at the moment i don't understand how to create global pool object, i don't fully understand how to work with asynchrony in python)
+- Use connection pools to reduce request time (at the moment i don't understand how to create global pool object, i don't fully understand how to work with asynchrony in python). Probably [solution](https://dev.to/sethmlarson/the-problem-with-flask-async-views-and-async-globals-pl)
 
 ## License
 [MIT](https://github.com/lusm554/document-text-search-engine/blob/main/LICENSE)
