@@ -7,11 +7,8 @@ services:
     container_name: app
     environment:
       FLASK_ENV: development
-      PG_HOSTNAME: host.docker.internal 
-      PG_USER: postgres
-      PG_PORT: 5432
-      PG_PWD: lusm123
-      PG_DB: documents
+    env_file:
+      - config/.env
     ports:
       - 80:80
     volumes:

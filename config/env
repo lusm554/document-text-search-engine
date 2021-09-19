@@ -1,1 +1,10 @@
 CSV_FILE_URL=""
+PG_HOSTNAME=host.docker.internal
+PG_USER=postgres
+PG_PORT=5432
+PG_PWD=lusm123
+PG_DB=documents
+ES_HOSTNAME=host.docker.internal
+ES_PORT=9200
+ES_INDEX=docs
+
