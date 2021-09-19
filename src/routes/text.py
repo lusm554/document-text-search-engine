@@ -32,8 +32,7 @@ async def search():
         return json.dumps(rows, ensure_ascii=False, default=str)
     except Exception as e:
         app.logger.info(e)
-        raise e
-        return '', 500
+        return Response(status=500)
 
 
 @router.route('/<id>', methods=['DELETE'])
