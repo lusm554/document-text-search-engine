@@ -1,8 +1,12 @@
 from flask import Flask, Blueprint, Response
+from flask_cors import CORS
 from .routes import text_router
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+# enable Access-Control-Allow-Origin for swagger
+CORS(app)
 
 # prefix for api routes
 api_bp = Blueprint('api-v1', __name__, url_prefix='/api/v1')
