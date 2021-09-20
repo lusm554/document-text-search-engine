@@ -1,118 +1,120 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Document text search engine",
-      "description": "A simple search engine for document texts. The data is stored in a database, the search index is in elastic.",
-      "version": "0.1.0",
-      "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/mit-license.php"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Document text search engine",
+    "description": "<h3>A simple search engine for document texts. The data is stored in a database, the search index is in elastic.</h3> [README with deployment guide](https://github.com/lusm554/document-text-search-engine)",
+    "version": "0.1.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/mit-license.php"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://{host}:{port}/api/v1",
+      "description": "REST API server",
+      "variables": {
+        "host": {
+          "default": "localhost"
+        },
+        "port": {
+          "default": "80"
+        }
       }
-    },
-    "paths": {
-      "/search": {
-        "get": {
-          "tags": [ "Search documents by arbitrary text" ],
-          "summary": "Returns a list of found documents.",
-          "description": "Searches the text of the document in the index and returns the first 20 documents with all database fields, sorted by creation date.",
-          "responses": {
-            "200": {
-              "description": "A JSON array of docs.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": { "type": "number" },
-                        "rubrics": { "type": "array", "items": { "type": "string" } },
-                        "text": { "type": "string" },
-                        "created_date": { "type": "string" }
+    }
+  ],
+  "paths": {
+    "/search": {
+      "get": {
+        "tags": [
+          "Search documents by arbitrary text"
+        ],
+        "summary": "Returns a list of found documents.",
+        "description": "Searches the text of the document in the index and returns the first 20 documents with all database fields, sorted by creation date.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of docs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "rubrics": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "text": {
+                        "type": "string"
+                      },
+                      "created_date": {
+                        "type": "string"
                       }
                     }
                   }
                 }
               }
-            },
-            "408": {
-                "description": "Service is not ready, timeout."
-            },
-            "400": {
-                "description": "Incorrect text query." 
-            },
-            "500": {
-                "description": "Internal Server Error." 
             }
           },
-          "parameters": [
-            {
-                "name": "text",
-                "in": "query",
-                "description": "Arbitrary text.",
-                "required": true,
-                "schema": {
-                    "type": "string",
-                    "description": "text"
-                }
+          "400": {
+            "description": "Incorrect text query"
+          },
+          "408": {
+            "description": "Service is not ready, timeout"
+          },
+          "414": {
+            "description": "URI Too Long"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Arbitrary text.",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
-          ],
-          "servers": [
-                {
-                    "url": "http://{host}:{port}/api/v1",
-                    "description": "REST API server",
-                    "variables": {
-                        "host": {
-                            "default": "localhost"
-                        },
-                        "port": {
-                            "default": "80"
-                        }
-                    }
-                }
-            ]
-        }
-      },
-      "/doc/{id}": {
-        "delete": {
-            "tags": [ "Delete document" ],
-            "description": "Delete document.",
-            "summary": "Deletes documents.",
-            "responses": {
-                "204": {
-                  "description": "Document deleted"
-                },
-                "500": {
-                   "description": "Internal Server Error" 
-                }
-            },
-            "parameters": [
-                {
-                  "name": "id",
-                  "in": "path",
-                  "description": "ID of document",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "description": "id"
-                  } 
-                }
-            ],
-            "servers": [
-                {
-                    "url": "http://{host}:{port}/api/v1",
-                    "description": "REST API server",
-                    "variables": {
-                        "host": {
-                            "default": "localhost"
-                        },
-                        "port": {
-                            "default": "80"
-                        }
-                    }
-                }
-            ]
-        }
+          }
+        ]
+      }
+    },
+    "/doc/{id}": {
+      "delete": {
+        "tags": [
+          "Delete document"
+        ],
+        "summary": "Deletes documents.",
+        "description": "Delete document.",
+        "responses": {
+          "204": {
+            "description": "Document deleted"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of document",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   }
+}
