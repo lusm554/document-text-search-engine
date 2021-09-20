@@ -35,8 +35,6 @@ async def search():
         if str(e) == 'ConnectionTimeout caused by - TimeoutError()':
             msg = 'Most likely the server did not manage to exit the idle state, please try again.'
             return Response(response=msg, status=408)
-
-        app.logger.info(e)
         return Response(status=500)
 
 
@@ -44,7 +42,9 @@ async def search():
 async def delete(id):
     try:
         app.logger.info(f'delete id = {id}')
-        return 'plug\n', 200
-    except:
-        return '', 500
+        await Docs.delete(int(id))
+        return Response(status=204) # in any case: if item already deleted or deleted not 
+    except Exception as e:
+        app.logger.info(e)
+        return Response(status=500)
 

@@ -23,3 +23,10 @@ class DocsDAO(DAO):
         }
         return (await self.__search_es__(body, index=self.index))['hits']['hits']
 
+    async def delete(self, id):
+        query = 'delete from text where id = $1'
+        body = {
+            'index': self.index,
+            'id': id
+        }
+        return await self.__delete_transaction__(body, query, id)

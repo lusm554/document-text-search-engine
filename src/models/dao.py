@@ -1,11 +1,11 @@
 import asyncio
 from src.db import Postgres, Elastic
+from elasticsearch import NotFoundError
 
 class DAO(object):
-    def __init__(self, pgtable='documents'):
+    def __init__(self):
         self.pg = Postgres()
         self.es = Elastic()
-        self.pgtable = pgtable
 
     async def __execute_pg_req__(self, query, args=()):
         try:
@@ -26,3 +26,30 @@ class DAO(object):
             raise es_req_error
         finally:
             await self.es.close()
+
+
+    async def __delete_transaction__(self, body, query, id):
+        try:
+            # init transaction
+            pg_conn = await self.pg.connect()
+            es = self.es.connect()
+            tr = pg_conn.transaction()
+            await tr.start()
+            
+            # delete from postgres
+            await pg_conn.execute(query, id)
+            
+            # delete from elastic
+            try:
+                res = await es.delete(**body)
+            except NotFoundError:
+                res = None
+        except Exception as del_transaction_error:
+            await tr.rollback()
+            raise del_transaction_error
+        else:
+            await tr.commit()
+        finally:
+            await self.es.close()
+            await self.pg.close()
+
