@@ -1,5 +1,4 @@
 from src.models.docs import DocsDAO
-from functools import wraps
 import asyncio
 import json
 from flask import (
@@ -27,11 +26,16 @@ async def search():
     try:
         text = req.args.get('text')
         docs = await Docs.search(text)
-        ids = [int(doc['_id']) for doc in docs]
+        ids = [int(doc['_source']['id']) for doc in docs]
         rows = await Docs.get_all(ids)
         rows = [dict(row.items()) for row in rows]
         return json.dumps(rows, ensure_ascii=False, default=str)
     except Exception as e:
+        # raw method of handle elastic connection timeout
+        if str(e) == 'ConnectionTimeout caused by - TimeoutError()':
+            msg = 'Most likely the server did not manage to exit the idle state, please try again.'
+            return Response(response=msg, status=408)
+
         app.logger.info(e)
         return Response(status=500)
 

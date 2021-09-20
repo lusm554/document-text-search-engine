@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, Response
 from .routes import text_router
 
 app = Flask(__name__)
@@ -11,9 +11,9 @@ app.register_blueprint(api_bp)
 
 @app.route('/')
 def get_main():
-   return 'OK', 200
+   return Response(response='OK', status=200)
 
 @app.errorhandler(404)
 def not_found(e):
-    return '<h1> 404</h1>', 404
+    return Response(response='<h1>404</h1>', status=404)
 
