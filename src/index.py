@@ -13,3 +13,7 @@ app.register_blueprint(api_bp)
 def get_main():
    return 'OK', 200
 
+@app.errorhandler(404)
+def not_found(e):
+    return '<h1> 404</h1>', 404
+
