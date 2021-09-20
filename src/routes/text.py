@@ -38,7 +38,7 @@ async def search():
         return Response(status=500)
 
 
-@router.route('/<id>', methods=['DELETE'])
+@router.route('doc/<id>', methods=['DELETE'])
 async def delete(id):
     try:
         app.logger.info(f'delete id = {id}')
