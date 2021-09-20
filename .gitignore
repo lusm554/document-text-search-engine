@@ -3,6 +3,7 @@ __pycache__/
 
 # Test dataset:
 *.csv
+!posts.csv
 
 # vim:
 *.swp
