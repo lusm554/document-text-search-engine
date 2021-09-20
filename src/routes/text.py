@@ -18,6 +18,8 @@ async def validation():
     if req.endpoint == search_endpoint:
         if not req.args.get('text'):
             return Response(status=400)
+        if len(req.args.get('text')) > 100:
+            return Response(status=414)
 
 
 @router.route('/search')
@@ -26,7 +28,6 @@ async def search():
         text = req.args.get('text')
         docs = await Docs.search(text)
         ids = [int(doc['_id']) for doc in docs]
-        app.logger.info(len(ids))
         rows = await Docs.get_all(ids)
         rows = [dict(row.items()) for row in rows]
         return json.dumps(rows, ensure_ascii=False, default=str)
