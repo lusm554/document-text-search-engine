@@ -34,30 +34,39 @@ A simple search engine for document texts. The data is stored in a database, the
 - [X] asynchronous API calls.
 
 ## How to run 
-If you want to change default config settings, look `docker-compose.yml`, `Docker`, `config/.env`. <br>
+If you want to change default config settings, look `docker-compose.yml`, `Docker`, `config/.env`. Default dataset stores in `config posts.csv`. <br>
 
-Set defaunt config.
+Clone service.
+```shell
+git clone https://github.com/lusm554/document-text-search-engine.git
+```
+
+Set default config.
 ```shell 
 cp config/env config/.env
 ```
 
-Then run:
+Run service:
 ```shell
 chmod +x run.sh
 ./run.sh 
 ```
+The service will start in about 2 minutes (due to importing data from postgres to elasticsearch), so run tests after the server API is ready. You can check this in the docker logs or just `curl localhost` (for the default config).
 
 ## Testing
-So, before testing service should be run. <br>
-If you changed some config data (in `docker-compose.yml` or `Docker` or `config/.env`) check out `testing/main.py`.
+As mentioned above, the service must be ready before testing. <br>
+If you changed some config data in `docker-compose.yml` or `Docker` or `config/.env` check out `testing/main.py`.
 ```shell
 chmod +x testing.sh
 ./testing.sh
 ```
 
-
 ## Improvement
-- Use connection pools to reduce request time (at the moment i don't understand how to create global pool object, i don't fully understand how to work with asynchrony in python). Probably [solution](https://dev.to/sethmlarson/the-problem-with-flask-async-views-and-async-globals-pl)
+My thoughts on what can be improved in this service:
+- Use connection pools to reduce request time (at the moment i don't understand how to create global pool object, i don't fully understand how to work with asynchrony in python). Probably [solution](https://dev.to/sethmlarson/the-problem-with-flask-async-views-and-async-globals-pl).
+- Probably use nginx for high concurrency.
+- Use production server able to communicate with Flask through a WSGI protocol.
+- Optimized task queues to manage long-running jobs, like search documents by arbitrary text.
 
 ## License
 [MIT](https://github.com/lusm554/document-text-search-engine/blob/main/LICENSE)
