@@ -34,7 +34,7 @@ A simple search engine for document texts. The data is stored in a database, the
 - [X] asynchronous API calls.
 
 ## How to run 
-If you want to change default config settings, look `docker-compose.yml`, `Docker`, `config/.env`. Default dataset stores in `config posts.csv`. <br>
+If you want to change default config settings, look `docker-compose.yml`, `Docker`, `config/.env`. Default dataset stores in `config posts.csv`, and config in `config/env`. <br>
 
 Clone service.
 ```shell
