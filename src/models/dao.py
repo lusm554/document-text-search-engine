@@ -2,6 +2,7 @@ import asyncio
 from src.db import Postgres, Elastic
 from elasticsearch import NotFoundError
 
+
 class DAO(object):
     def __init__(self):
         self.pg = Postgres()
@@ -19,14 +20,13 @@ class DAO(object):
 
     async def __search_es__(self, body, index, size=20):
         try:
-           es = self.es.connect() 
-           docs = await es.search(index=index, body=body, size=size)
-           return docs
+            es = self.es.connect()
+            docs = await es.search(index=index, body=body, size=size)
+            return docs
         except Exception as es_req_error:
             raise es_req_error
         finally:
             await self.es.close()
-
 
     async def __delete_transaction__(self, body, query, id):
         try:
@@ -35,10 +35,8 @@ class DAO(object):
             es = self.es.connect()
             tr = pg_conn.transaction()
             await tr.start()
-            
             # delete from postgres
             await pg_conn.execute(query, id)
-            
             # delete from elastic
             try:
                 res = await es.delete(**body)

@@ -2,13 +2,14 @@ from src.models.docs import DocsDAO
 import asyncio
 import json
 from flask import (
-    Blueprint, 
+    Blueprint,
     Response,
-    request as req, 
+    request as req,
 )
 
 router = Blueprint('text', __name__, url_prefix='/')
 Docs = DocsDAO()
+
 
 @router.before_request
 async def validation():
@@ -41,7 +42,7 @@ async def search():
 async def delete(id):
     try:
         await Docs.delete(int(id))
-        return Response(status=204) # in any case: if item already deleted or deleted now 
+        return Response(status=204)  # in any case: if item already deleted or deleted now
     except:
         return Response(status=500)
 

@@ -13,9 +13,11 @@ api_bp = Blueprint('api-v1', __name__, url_prefix='/api/v1')
 api_bp.register_blueprint(text_router)
 app.register_blueprint(api_bp)
 
+
 @app.route('/')
 def get_main():
-   return Response(response='OK', status=200)
+    return Response(response='OK', status=200)
+
 
 @app.errorhandler(404)
 def not_found(e):
