@@ -36,6 +36,11 @@ A simple search engine for document texts. The data is stored in a database, the
 ## How to run 
 If you want to change default config settings, look `docker-compose.yml`, `Docker`, `config/.env`. <br>
 
+Set defaunt config.
+```shell 
+cp config/env config/.env
+```
+
 Then run:
 ```shell
 chmod +x run.sh
