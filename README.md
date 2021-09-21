@@ -3,6 +3,7 @@
 ## Documentation
 * [About](#about)
 * [How to run](#how-to-run)
+* [Testing](#testing)
 * [What can be improved here?](#improvement)
 * [License](#license)
 
@@ -33,8 +34,7 @@ A simple search engine for document texts. The data is stored in a database, the
 - [X] asynchronous API calls.
 
 ## How to run 
-Set variables in `config/.env`. Example of dotenv in the same dir - `config/env`. <br>
-For example: set `CSV_FILE_URL` to link of the test dataset.
+If you want to change default config settings, look `docker-compose.yml`, `Docker`, `config/.env`. <br>
 
 Then run:
 ```shell
@@ -42,8 +42,16 @@ chmod +x run.sh
 ./run.sh 
 ```
 
-## Improvement
+## Testing
+So, before testing service should be run. <br>
+If you changed some config data (in `docker-compose.yml` or `Docker` or `config/.env`) check out `testing/main.py`.
+```shell
+chmod +x testing.sh
+./testing.sh
+```
 
+
+## Improvement
 - Use connection pools to reduce request time (at the moment i don't understand how to create global pool object, i don't fully understand how to work with asynchrony in python). Probably [solution](https://dev.to/sethmlarson/the-problem-with-flask-async-views-and-async-globals-pl)
 
 ## License
