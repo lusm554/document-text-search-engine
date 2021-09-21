@@ -12,6 +12,18 @@ def test_get_main_page_status_code_equals_200():
     r = requests.get(url())
     assert r.status_code == 200
 
+# NOT EXISTING PATH
+def test_request_not_existing_path_code_equals_404():
+    u = url('/smth/her')
+    r = requests.get(u)
+    assert r.status_code == 404
+    r = requests.post(u)
+    assert r.status_code == 404
+    r = requests.delete(u)
+    assert r.status_code == 404
+    r = requests.put(u)
+    assert r.status_code == 404
+
 # GET SEARCH BY TEXT
 def test_get_search_by_text_status_code_equals_200():
     r = requests.get(url('/api/v1/search', { 'text': 'привет' }))
@@ -37,4 +49,16 @@ def test_delete_by_id_status_code_equals_204():
 
     r = requests.delete(url('/api/v1/doc/1600'))
     assert r.status_code == 204
+
+def test_delete_by_id_status_code_equals_400():
+    r = requests.delete(url('/api/v1/doc/e5213dsf'))
+    assert r.status_code == 400
+    r = requests.delete(url('/api/v1/doc/d3'))
+    assert r.status_code == 400
+    r = requests.delete(url('/api/v1/doc/412_2'))
+    assert r.status_code == 400
+
+def test_delete_by_id_status_code_equals_404():
+    r = requests.delete(url('/api/v1/doc/'))
+    assert r.status_code == 404
 

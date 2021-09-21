@@ -14,11 +14,17 @@ Docs = DocsDAO()
 @router.before_request
 async def validation():
     search_endpoint = 'api-v1.text.search'
+    delete_endpoint = 'api-v1.text.delete'
     if req.endpoint == search_endpoint:
         if not req.args.get('text'):
             return Response(status=400)
         if len(req.args.get('text')) > 100:
             return Response(status=414)
+    if req.endpoint == delete_endpoint:
+        try:
+            assert req.view_args['id'].isnumeric()
+        except:
+            return Response(status=400)
 
 
 @router.route('/search')

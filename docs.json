@@ -99,6 +99,9 @@
           "204": {
             "description": "Document deleted"
           },
+          "400": {
+            "description": "Incorrect ID"
+          },
           "500": {
             "description": "Internal Server Error"
           }
