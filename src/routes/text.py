@@ -5,7 +5,6 @@ from flask import (
     Blueprint, 
     Response,
     request as req, 
-    current_app as app # remove
 )
 
 router = Blueprint('text', __name__, url_prefix='/')
@@ -30,7 +29,7 @@ async def search():
         rows = await Docs.get_all(ids)
         rows = [dict(row.items()) for row in rows]
         return json.dumps(rows, ensure_ascii=False, default=str)
-    except Exception as e:
+    except:
         # raw method of handle elastic connection timeout
         if str(e) == 'ConnectionTimeout caused by - TimeoutError()':
             msg = 'Most likely the server did not manage to exit the idle state, please try again.'
@@ -41,10 +40,8 @@ async def search():
 @router.route('doc/<id>', methods=['DELETE'])
 async def delete(id):
     try:
-        app.logger.info(f'delete id = {id}')
         await Docs.delete(int(id))
-        return Response(status=204) # in any case: if item already deleted or deleted not 
-    except Exception as e:
-        app.logger.info(e)
+        return Response(status=204) # in any case: if item already deleted or deleted now 
+    except:
         return Response(status=500)
 

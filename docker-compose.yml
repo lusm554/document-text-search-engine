@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile
     container_name: app
     environment:
-      - FLASK_ENV=development
+    #- FLASK_ENV=development
+      - FLASK_ENV=production
       - WAIT_COMMAND=[ $$(curl -s -o /dev/null -w "%{http_code}" "host.docker.internal:$$ES_PORT/docs") = 200 ]
       - WAIT_START_CMD=flask run 
     env_file:
