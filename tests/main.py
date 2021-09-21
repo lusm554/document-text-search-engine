@@ -18,6 +18,8 @@ def test_get_search_by_text_status_code_equals_200():
     if r.status_code == 408:
         print('The service is not ready, let\'s give it one more chance.')
         r = requests.get(url('/api/v1/search', { 'text': 'привет' }))
+    text = 'добавлю тюнингом коньках ПОДХОДИШЬ погулять интернете ЖКХ Минздрава объяснила, что сейчас через СМИ; При этом.'
+    r = requests.get(url('/api/v1/search', { 'text': 'привет' }))
     assert r.status_code == 200
 
 def test_get_search_by_text_status_code_equals_400():

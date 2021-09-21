@@ -29,7 +29,7 @@ async def search():
         rows = await Docs.get_all(ids)
         rows = [dict(row.items()) for row in rows]
         return json.dumps(rows, ensure_ascii=False, default=str)
-    except:
+    except Exception as e:
         # raw method of handle elastic connection timeout
         if str(e) == 'ConnectionTimeout caused by - TimeoutError()':
             msg = 'Most likely the server did not manage to exit the idle state, please try again.'
