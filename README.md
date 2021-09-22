@@ -55,7 +55,7 @@ The service will start in about 2 minutes (due to importing data from postgres t
 
 ## Testing
 As mentioned above, the service must be ready before testing. <br>
-If you changed some config data in `docker-compose.yml` or `Docker` or `config/.env` check out `testing/main.py`.
+If you changed some config data in `docker-compose.yml` or `Docker` or `config/.env` check out `testing/main.py`. Make sure you have `requests` and `pytest` installed or just `pip install requests pytest`.
 ```shell
 chmod +x testing.sh
 ./testing.sh
