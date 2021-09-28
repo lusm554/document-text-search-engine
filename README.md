@@ -67,6 +67,7 @@ My thoughts on what can be improved in this service:
 - Probably use nginx for high concurrency.
 - Use production server able to communicate with Flask through a WSGI protocol.
 - Optimized task queues to manage long-running jobs, like search documents by arbitrary text.
+- How find error? Logging.
 
 ## License
 [MIT](https://github.com/lusm554/document-text-search-engine/blob/main/LICENSE)
