@@ -68,6 +68,7 @@ My thoughts on what can be improved in this service:
 - Use production server able to communicate with Flask through a WSGI protocol.
 - Optimized task queues to manage long-running jobs, like search documents by arbitrary text.
 - How find error? Logging.
+- Use Quart instead of Flask async.
 
 ## License
 [MIT](https://github.com/lusm554/document-text-search-engine/blob/main/LICENSE)
