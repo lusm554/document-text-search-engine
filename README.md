@@ -8,7 +8,8 @@
 * [License](#license)
 
 ## About
-A simple search engine for document texts. The data is stored in a database, the search index is in elastic.
+A simple search engine for document texts. The data is stored in a database, the search index is in elastic. <br>
+<b> Technical task</b> u can find in [tech-task.pdf](tech-task.pdf)
 
 ### **Database structure:**
 * `id` – unique identifier for every doc;
